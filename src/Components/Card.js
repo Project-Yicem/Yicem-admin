@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Grid } from '@mui/material';
 
 const Card = ({ data, onDelete, onApprove, onReject }) => {
   const cardStyle = {
@@ -20,27 +21,46 @@ const Card = ({ data, onDelete, onApprove, onReject }) => {
     <div style={cardStyle}>
       {data.map((item, index) => (
         <div key={index}>
-          <span style={labelStyle}>{item.label}:</span>
-          <span>{item.info}</span>
+          <span style={labelStyle}>{item.label ? item.label : "-"}:</span>
+          <span>{item.info ? item.info : "-"}</span>
         </div>
       ))}
-      {onDelete && (
-        <button onClick={onDelete} className="deleteButton">
-          Delete
-        </button>
-      )}
-      {onApprove && (
-        <button onClick={onApprove} className="approveButton">
-          Approve
-        </button>
-      )}
-      {onReject && (
-        <button onClick={onReject} className="rejectButton">
-          Reject
-        </button>
-      )}
+      <Grid container spacing={2}>
+  {onDelete && (
+    <Grid item>
+      <Button onClick={onDelete} variant="contained" color="error" size="small" className="deleteButton" style={styles.smallButton}>
+        Delete
+      </Button>
+    </Grid>
+  )}
+  {onApprove && (
+    <Grid item>
+      <Button onClick={onApprove} variant="contained" color="primary" size="small" className="approveButton" style={styles.smallButton}>
+        Approve
+      </Button>
+    </Grid>
+  )}
+  {onReject && (
+    <Grid item>
+      <Button onClick={onReject} variant="contained" color="error" size="small" className="rejectButton" style={styles.smallButton} >
+        Reject
+      </Button>
+    </Grid>
+  )}
+  {!onDelete && !onApprove && ! onReject && (
+    <div style={{padding: "8px"}}></div>
+  )}
+</Grid>
     </div>
   );
+};
+
+const styles = {
+  smallButton: { fontWeight: 'bold',
+    padding: '4px 50px',
+    fontSize: '0.75rem'
+  },
+
 };
 
 export default Card;

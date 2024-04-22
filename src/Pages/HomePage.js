@@ -29,7 +29,7 @@ const HomeScreen = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <SideBar/>
+      <SideBar pageNo={0}/>
       <div style={{ padding: '20px' }}>
           <h1>Welcome to Admin Dashboard</h1>
           {/* Main content area */}
