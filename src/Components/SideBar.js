@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Tab, Tabs } from '@mui/material';
 
 const sidebarStyle = {
-  backgroundColor: 'orange',
+  backgroundColor: '#f26f55',
   width: '200px',
   color: 'white',
 };
@@ -33,35 +33,35 @@ const SideBar = ({pageNo, handleChange}) => {
             component="a"
             href="/Home"
             onClick={handleChange}
-            style={pageNo === 0 ? { ...linkStyle, backgroundColor: 'red' } : linkStyle}
+            style={pageNo === 0 ? { ...linkStyle, backgroundColor: '#fdbcb4' } : linkStyle}
           />
           <Tab
             label="Approvals"
             component="a"
             href="/approvals"
             onClick={handleChange}
-            style={pageNo === 1 ? { ...linkStyle, backgroundColor: 'red' } : linkStyle}
+            style={pageNo === 1 ? { ...linkStyle, backgroundColor: '#fdbcb4' } : linkStyle}
           />
           <Tab
             label="Businesses"
             component="a"
             href="/businesses"
             onClick={handleChange}
-            style={pageNo === 2 ? { ...linkStyle, backgroundColor: 'red' } : linkStyle}
+            style={pageNo === 2 ? { ...linkStyle, backgroundColor: '#fdbcb4' } : linkStyle}
           />
           <Tab
             label="Customers"
             component="a"
             href="/customers"
             onClick={handleChange}
-            style={pageNo === 3 ? { ...linkStyle, backgroundColor: 'red' } : linkStyle}
+            style={pageNo === 3 ? { ...linkStyle, backgroundColor: '#fdbcb4' } : linkStyle}
           />
           <Tab
             label="Feedbacks"
             component="a"
             href="/feedbacks"
             onClick={handleChange}
-            style={pageNo === 4 ? { ...linkStyle, backgroundColor: 'red' } : linkStyle}
+            style={pageNo === 4 ? { ...linkStyle, backgroundColor: '#fdbcb4' } : linkStyle}
           />
         </Tabs>
       </div>

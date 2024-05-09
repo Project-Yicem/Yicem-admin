@@ -57,7 +57,7 @@ const BuyersPage = () => {
   const deleteAPIcustomer = async (id) => {
     try {
       const userToken = localStorage.getItem("userToken");
-      const url = `http://localhost:8080/api/buyer/delete/${id}`;
+      const url = `http://localhost:8080/api/admin/delete-buyer/${id}`;
       const config = {
         headers: {
           Authorization: `Bearer ${userToken}`
@@ -92,13 +92,13 @@ const BuyersPage = () => {
         )
       );
     }
-    else if(searchBy === "email"){
-      setFilteredData(
-        buyersData.filter((buyer) =>
-          buyer.email.toLowerCase().includes(searchQuery.toLowerCase())             //CHANGE WHEN NEEDED
-        )
-      );
-    }
+    // else if(searchBy === "email"){
+    //   setFilteredData(
+    //     buyersData.filter((buyer) =>
+    //       buyer.email.toLowerCase().includes(searchQuery.toLowerCase())             //CHANGE WHEN NEEDED
+    //     )
+    //   );
+    // }
     
     console.log(filteredData);
   }, [buyersData, searchQuery, searchBy]);
@@ -152,7 +152,6 @@ const BuyersPage = () => {
                 { label: "Username", info: buyer.username },
                 { label: "Email", info: buyer.email },
                 { label: "Phone", info: buyer.phoneNumber },
-                { label: "Password", info: buyer.password },             //Delete this
               ]}
               onDelete={() => handleDelete(buyer.id)}
             />

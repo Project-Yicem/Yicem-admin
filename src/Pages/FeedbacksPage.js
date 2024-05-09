@@ -37,14 +37,20 @@ const FeedbacksPage = () => {
   const fetchFeedbacks = async () => {
     try {
       const userToken = localStorage.getItem("userToken");
-      const url = `http://localhost:8080/api/admin/feedbacks`;              //TODO Change URL
+      const url = `http://localhost:8080/api/admin/reports`;
       const config = {
         headers: {
           Authorization: `Bearer ${userToken}`
         }
       };
       const response = await axios.get(url, config);
-      setFeedbacksData(response.data);
+      if(!response.data || response.data.size <= 0){
+        setFeedbacksData([]);
+      }
+      else{
+        setFeedbacksData(response.data);
+      }
+
       console.log(response.data);
     } catch (error) {
       console.error("Fetch error:", error);
@@ -59,42 +65,42 @@ const FeedbacksPage = () => {
   }, []);
 
   useEffect(() => {
-    const dummyFeedbacks = [
-        {
-          customerName: 'John Doe',
-          topic: "about zort",
-          content: "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet"
-        },
-        {
-          customerName: 'yasuo',
-          topic: "about feeding",
-          content: "no gank! dum jg"
-        },
-        {
-          customerName: 'Master yi',
-          topic: "about ganks",
-          content: "you stole my red,  amet lorem ipsum dolor si amet lorem ipsum dolor si amet lorem ipsum dolor si amet lorem ipsum dolor si"
-        }
-      ];
+    // const dummyFeedbacks = [
+    //     {
+    //       customerName: 'Jane Doe',
+    //       topic: "lorem ipsum",
+    //       content: "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet"
+    //     },
+    //     {
+    //       customerName: 'John Dove',
+    //       topic: "Suggestions",
+    //       content: "lorem ipsum dolor sit amet lorem"
+    //     },
+    //     {
+    //       customerName: 'Dave Dove',
+    //       topic: "bad seller",
+    //       content: "lorem ipsum dolor sit amet lorem  amet lorem ipsum dolor si amet lorem ipsum dolor si amet lorem ipsum dolor si amet lorem ipsum dolor si"
+    //     }
+    //   ];
       
-      setFeedbacksData(dummyFeedbacks);
+    //   setFeedbacksData(dummyFeedbacks);
 
     if (!searchQuery) {
       setFilteredData(feedbacksData);
       return;
     }
    
-    if(searchBy === "customer name"){
+    if(searchBy === "business id"){
       setFilteredData(
         feedbacksData.filter((feedback) =>
-        feedback.customerName.toLowerCase().includes(searchQuery.toLowerCase())
+        feedback.reportedBusinessId.toLowerCase().includes(searchQuery.toLowerCase())
         )
       );
     }
     else if(searchBy === "topic"){
       setFilteredData(
         feedbacksData.filter((feedback) =>
-        feedback.topic.toLowerCase().includes(searchQuery.toLowerCase())             //CHANGE WHEN NEEDED
+        feedback.reportDescription.toLowerCase().includes(searchQuery.toLowerCase())             //CHANGE WHEN NEEDED
         )
       );
     }
@@ -116,8 +122,8 @@ const FeedbacksPage = () => {
               variant="outlined"
               style={{ width: '170px' }}
             >
-              <MenuItem value="customer name"> Customer Name</MenuItem>
-              <MenuItem value="topic">Topic</MenuItem>
+              <MenuItem value="business id"> Business ID</MenuItem>
+              <MenuItem value="topic">Content</MenuItem>
             </Select>
             <TextField
               value={searchQuery}
@@ -142,9 +148,9 @@ const FeedbacksPage = () => {
             <Card
               key={index}
               data={[
-                { label: "Customer Name", info: feedback.customerName },
-                { label: "Topic", info: feedback.topic },
-                { label: "Content", info: feedback.content },
+                { label: "Business ID", info: feedback.reportedBusinessId },
+                { label: "Report", info: feedback.reportDescription },
+                // { label: "Content", info: feedback.content },
               ]}
             />
           ))}

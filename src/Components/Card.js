@@ -10,6 +10,8 @@ const Card = ({ data, onDelete, onApprove, onReject }) => {
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     backgroundColor: '#fff',
     fontFamily: 'Arial, sans-serif',
+    borderWidth:2,
+    borderColor:"#f26f55",
   };
 
   const labelStyle = {
@@ -58,7 +60,7 @@ const Card = ({ data, onDelete, onApprove, onReject }) => {
 const styles = {
   smallButton: { fontWeight: 'bold',
     padding: '4px 50px',
-    fontSize: '0.75rem'
+    fontSize: '0.75rem',
   },
 
 };

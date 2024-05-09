@@ -62,7 +62,7 @@ const ApprovalPage = () => {
   const deleteAPIbusiness = async (id) => {
     try {
       const userToken = localStorage.getItem("userToken");
-      const url = `http://localhost:8080/api/seller/delete/${id}`;
+      const url = `http://localhost:8080/api/admin/delete-seller/${id}`;
       const config = {
         headers: {
           Authorization: `Bearer ${userToken}`
@@ -83,13 +83,13 @@ const ApprovalPage = () => {
   const approveBusiness = async (id) => {
     try {
       const userToken = localStorage.getItem("userToken");
-      const url = `http://localhost:8080/api/seller/approve/${id}`;
+      const url = `http://localhost:8080/api/admin/approve-seller/${id}`;
       const config = {
         headers: {
           Authorization: `Bearer ${userToken}`
         }
       };
-      const response = await axios.post(url, config);
+      const response = await axios.post(url, {}, config);
       console.log(response);
       fetchPendingApprovals();
       //setSellersData(response.data);
@@ -182,8 +182,8 @@ const ApprovalPage = () => {
               data={[
                 { label: "Business name", info: seller.businessName },
                 { label: "Phone", info: seller.phone },
-                { label: "Email", info: seller.email },
-                { label: "Working Hours", info: seller.workingHours },
+                // { label: "Email", info: seller.email },
+                { label: "Working Hours", info: `${seller.openingHour} - ${seller.closingHour}` },
                 { label: "Address", info: seller.address },
               ]}
               onApprove={() => handleApprove(seller.id)} 

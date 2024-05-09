@@ -62,7 +62,7 @@ const SellersPage = () => {
   const deleteAPIbusiness = async (id) => {
     try {
       const userToken = localStorage.getItem("userToken");
-      const url = `http://localhost:8080/api/seller/delete/${id}`;
+      const url = `http://localhost:8080/api/admin/delete-seller/${id}`;
       const config = {
         headers: {
           Authorization: `Bearer ${userToken}`
@@ -155,8 +155,8 @@ const SellersPage = () => {
               data={[
                 { label: "Business name", info: seller.businessName },
                 { label: "Phone", info: seller.phone },
-                { label: "Email", info: seller.email },
-                { label: "Working Hours", info: seller.workingHours },
+                // { label: "Email", info: seller.email },
+                { label: "Working Hours", info: `${seller.openingHour} - ${seller.closingHour}` },
                 { label: "Address", info: seller.address },
               ]}
               onDelete={() => handleDelete(seller.id)}
